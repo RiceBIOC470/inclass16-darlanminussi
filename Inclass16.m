@@ -102,7 +102,7 @@ min_area = 50;
 frame1_mask_filter_c2 = bwareaopen(frame1_mask_p_c2, min_area);
 imshow(frame1_mask_filter_c2);
 
-frame2_mask_filter_c2 = bwareaopen(frame2_mask_p_c2, 300);
+frame2_mask_filter_c2 = bwareaopen(frame2_mask_p_c2, min_area);
 imshow(frame2_mask_filter_c2);
 
 imshowpair(frame1_mask_filter_c2, frame2_mask_filter_c2);
@@ -124,6 +124,7 @@ xy2 = cat(1, stats_t2.Centroid);
 a2 = cat(1, stats_t2.Area);
 mi2 = cat(1, stats_t2.MeanIntensity);
 mi2_c2 = cat(1, stats_t2_c2.MeanIntensity);
+mi2_c2 = mi2_c2(1:28,:);
 tmp = -1*ones(size(a2));
 peaks{2} = [xy2, a2, tmp, mi2, mi2_c2];
 % returns an error because mean intensity for channel 2 has different
@@ -135,7 +136,7 @@ peaks{2} = [xy2, a2, tmp, mi2, mi2_c2];
 
 addpath('TrackingCode/');
 
-peaks_matched = MatchFrames(peaks, 3, 0.3);
+peaks_matched = MatchFrames(peaks, 2, 0.3);
 
 
 % snippet
@@ -147,4 +148,9 @@ peaksnew = MatchFrames(peaks,2,0.3);
 % Part 3. Display the image from the second frame. For each cell that was
 % matched, plot its position in frame 2 with a blue square, its position in
 % frame 1 with a red star, and connect these two with a green line. 
+
+imshow(frame2, []);
+hold on;
+plot(peaks{1}(:,1), peaks{1}(:,2), 'r*', 'MarkerSize', 24);
+plot(peaks{2}(:,1), peaks{2}(:,2), 'gs', 'MarkerSize', 24);
 
