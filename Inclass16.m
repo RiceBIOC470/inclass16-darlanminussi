@@ -127,8 +127,6 @@ mi2_c2 = cat(1, stats_t2_c2.MeanIntensity);
 mi2_c2 = mi2_c2(1:28,:);
 tmp = -1*ones(size(a2));
 peaks{2} = [xy2, a2, tmp, mi2, mi2_c2];
-% returns an error because mean intensity for channel 2 has different
-% length
 
 
 % Part 2. Run match frames on this peaks array. ensure that it has filled
@@ -138,8 +136,10 @@ addpath('TrackingCode/');
 
 peaks_matched = MatchFrames(peaks, 2, 0.3);
 
+% function is returning this error Function 'subsindex' is not defined for values of class 'cell'.
 
-% snippet
+
+% email test snippet from Dr. Warmflash
 peaks{1} = [rand(10,3), -1*ones(10,1)];
 peaks{2} = [rand(10,3), -1*ones(10,1)];
 peaksnew = MatchFrames(peaks,2,0.3);
