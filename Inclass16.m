@@ -124,7 +124,6 @@ xy2 = cat(1, stats_t2.Centroid);
 a2 = cat(1, stats_t2.Area);
 mi2 = cat(1, stats_t2.MeanIntensity);
 mi2_c2 = cat(1, stats_t2_c2.MeanIntensity);
-mi2_c2 = mi2_c2(1:28,:);
 tmp = -1*ones(size(a2));
 peaks{2} = [xy2, a2, tmp, mi2, mi2_c2];
 
